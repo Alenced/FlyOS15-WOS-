@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FlyOS 15 Web Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    .app-card {
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .app-open {
+      transform: scale(0.95);
+      opacity: 0.5;
+    }
+    .fade-in {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white transition-all">
+  <div class="min-h-screen flex flex-col items-center justify-center p-4">
+    <h1 class="text-3xl font-bold mb-6">FlyOS 15 Demo</h1>
+    <div class="grid grid-cols-3 gap-4">
+      <div class="app-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4 w-32 h-32 flex flex-col items-center justify-center cursor-pointer hover:scale-105" onclick="openApp('calculator')">
+        <span class="text-xl">🧮</span>
+        <p class="mt-2">Calcolatrice</p>
+      </div>
+      <div class="app-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4 w-32 h-32 flex flex-col items-center justify-center cursor-pointer hover:scale-105" onclick="openApp('phone')">
+        <span class="text-xl">📞</span>
+        <p class="mt-2">Telefono</p>
+      </div>
+      <div class="app-card bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-4 w-32 h-32 flex flex-col items-center justify-center cursor-pointer hover:scale-105" onclick="openApp('settings')">
+        <span class="text-xl">⚙️</span>
+        <p class="mt-2">Impostazioni</p>
+      </div>
+    </div><div id="appWindow" class="fixed inset-0 bg-white dark:bg-gray-800 hidden flex-col items-center justify-center fade-in z-50">
+  <h2 class="text-2xl font-semibold mb-4">App in esecuzione</h2>
+  <button class="px-4 py-2 bg-blue-600 text-white rounded-full" onclick="closeApp()">Chiudi</button>
+</div>
+
+  </div>  <script>
+    const appWindow = document.getElementById('appWindow');
+    const cards = document.querySelectorAll('.app-card');
+
+    function openApp(appName) {
+      cards.forEach(card => card.classList.add('app-open'));
+      appWindow.classList.remove('hidden');
+    }
+
+    function closeApp() {
+      appWindow.classList.add('hidden');
+      cards.forEach(card => card.classList.remove('app-open'));
+    }
+  </script></body>
+</html>
